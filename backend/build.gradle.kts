@@ -2,6 +2,7 @@ plugins {
 	java
 	id("org.springframework.boot") version "3.5.8"
 	id("io.spring.dependency-management") version "1.1.7"
+    id ("org.flywaydb.flyway") version "11.17.1"
 }
 
 group = "com.journeysense"
@@ -34,6 +35,8 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 	testImplementation("org.springframework.security:spring-security-test")
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+    implementation("org.flywaydb:flyway-core:11.17.1")
+    implementation("org.flywaydb:flyway-database-postgresql")
 }
 
 tasks.withType<Test> {
