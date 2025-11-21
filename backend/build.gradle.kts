@@ -37,6 +37,7 @@ dependencies {
 	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
     implementation("org.flywaydb:flyway-core:11.17.1")
     implementation("org.flywaydb:flyway-database-postgresql")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.3")
 }
 
 tasks.withType<Test> {
