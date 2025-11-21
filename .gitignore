@@ -1,0 +1,24 @@
+# --- IntelliJ & IDE ---
+.idea/
+*.iml
+*.iws
+.vscode/
+.DS_Store
+
+# --- Gradle (Backend & Mobile) ---
+.gradle/
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+backend/bin/
+backend/out/
+
+# --- Node / React (Frontend) ---
+frontend/node_modules/
+frontend/dist/
+frontend/.env.local
+
+# --- Android Specific ---
+mobile/local.properties
+mobile/.cxx/
+*.log
