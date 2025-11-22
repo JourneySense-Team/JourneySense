@@ -61,13 +61,12 @@ VALUES
     ('d4d4e5f6-a7b8-9012-3456-7890abcdef02', 'e5f6a7b8-c9d0-1234-5678-90abcdef0123', 'b1b2c3d4-e5f6-7890-1234-567890abcdef', NOW());
 
 -- Insert mock posts
-INSERT INTO posts (id, title, description, tag, file_url, created_at, user_id, hub_id)
-VALUES
-    ('c1b2c3d4-e5f6-7890-1234-567890abcdef', 'by First Photo', 'This is my first attempt at landscape photography.', 'landscape', 'attp://example.com/photo1.jpg', NOW(), 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'a1b2c3d4-e5f6-7890-1234-567890abcdef'),
-    ('c2c3d4e5-f6a7-8901-2345-67890abcdef0', 'Favorite Sci-Fi Books', 'What are your favorite science fiction books?', 'sci-fi', NULL, NOW(), 'b2c3d4e5-f6a7-8901-2345-67890abcdef0', 'a2c3d4e5-f6a7-8901-2345-67890abcdef0'),
-    ('c3d4e5f6-a7b8-9012-3456-7890abcdef01', 'Newbie Gamer', 'Just joined the hub, what are some must-play games?', 'newbie', NULL, NOW(), 'e5f6a7b8-c9d0-1234-5678-90abcdef0123', 'a4d4e5f6-a7b8-9012-3456-7890abcdef02'),
-    ('c4d4e5f6-a7b8-9012-3456-7890abcdef02', 'Best Chocolate Chip Cookie Recipe', 'I''b looking for the ultimate chocolate chip cookie recipe.', 'baking', NULL, NOW(), 'f6a7b8c9-d0e1-2345-6789-0abcdef01234', 'a5d4e5f6-a7b8-9012-3456-7890abcdef03');
-
+ INSERT INTO posts (id, title, description, tag, file_url, created_at, user_id, hub_id)
+ VALUES
+     ('c1b2c3d4-e5f6-7890-1234-567890abcdef', 'My First Photo', 'This is my first attempt at landscape photography.', 'BEGINNER', 'http://example.com/photo1.jpg', NOW(), 'a1b2c3d4-e5f6-7890-1234-567890abcdef', 'a1b2c3d4-e5f6-7890-1234-567890abcdef'),
+     ('c2c3d4e5-f6a7-8901-2345-67890abcdef0', 'Favorite Sci-Fi Books', 'What are your favorite science fiction books?', 'INTERMEDIATE', NULL, NOW(), 'b2c3d4e5-f6a7-8901-2345-67890abcdef0', 'a2c3d4e5-f6a7-8901-2345-67890abcdef0'),
+     ('c3d4e5f6-a7b8-9012-3456-7890abcdef01', 'Newbie Gamer', 'Just joined the hub, what are some must-play games?', 'BEGINNER', NULL, NOW(), 'e5f6a7b8-c9d0-1234-5678-90abcdef0123', 'a4d4e5f6-a7b8-9012-3456-7890abcdef02'),
+     ('c4d4e5f6-a7b8-9012-3456-7890abcdef02', 'Best Chocolate Chip Cookie Recipe', 'I''m looking for the ultimate chocolate chip cookie recipe.', 'ADVANCED', NULL, NOW(), 'f6a7b8c9-d0e1-2345-6789-0abcdef01234', 'a5d4e5f6-a7b8-9012-3456-7890abcdef03');
 -- Insert mock comments
 INSERT INTO comments (id, text, user_id, post_id, created_at)
 VALUES

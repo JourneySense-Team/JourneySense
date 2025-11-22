@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/posts")
-@CrossOrigin("*")
 public class PostsController {
     private final PostsService postsService;
 

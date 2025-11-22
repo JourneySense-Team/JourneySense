@@ -12,7 +12,6 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/badges")
-@CrossOrigin("*")
 public class BadgeController {
 
     private final BadgeService badgeService;
