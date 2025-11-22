@@ -5,41 +5,43 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@AllArgsConstructor
-@NoArgsConstructor
+@Entity
 @Getter
 @Builder
-@Entity
-@Table(name = "badges")
-public class Badge {
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Table(name = "user_badges")
+public class UserBadge {
     @Id
     @GeneratedValue
     @Column(updatable = false, nullable = false, columnDefinition = "UUID DEFAULT gen_random_uuid()")
     private UUID id;
 
     @Setter
-    @Builder.Default
-    @Column(nullable = false)
-    private String title= "";
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @Setter
-    @Builder.Default
-    private String description = "";
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "badge_id")
+    private Badge badge;
 
-    @Setter
-    @Builder.Default
     @Column(nullable = false)
-    private int rewardExperience = 0;
-
-
-
+    @Builder.Default
+    private LocalDateTime dateAcquired = LocalDateTime.now();
 }

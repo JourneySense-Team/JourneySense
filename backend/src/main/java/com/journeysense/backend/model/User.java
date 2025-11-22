@@ -32,8 +32,8 @@ import java.util.UUID;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "uuid DEFAULT gen_random_uuid()", updatable = false, nullable = false)
+    @GeneratedValue
+    @Column(updatable = false, nullable = false, columnDefinition = "UUID DEFAULT gen_random_uuid()")
     private UUID id;
 
     @Setter
@@ -64,11 +64,21 @@ public class User implements Serializable {
     @Column(nullable = false)
     private int experience;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private Role role = Role.APPRENTICE;
 
-    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*
+    @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Friendship> sentFriendRequests = new ArrayList<>();
+
+    @OneToMany(mappedBy = "addressee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Friendship> receivedFriendRequests = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private Set<HubMembership> hubMemberships = new HashSet<>();
 

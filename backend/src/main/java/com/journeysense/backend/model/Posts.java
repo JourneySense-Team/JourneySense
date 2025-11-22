@@ -8,15 +8,16 @@ import lombok.NoArgsConstructor;
 
 import java.util.UUID;
 
-@Entity
+//@Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
-@Table(name = "posts")
+//@Data
+//@Table(name = "posts")
 public class Posts {
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
+    @GeneratedValue
+    @Column(columnDefinition = "UUID DEFAULT gen_random_uuid()")
     private UUID id;
 
     @Column

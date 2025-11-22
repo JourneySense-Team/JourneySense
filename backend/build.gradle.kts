@@ -1,3 +1,12 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.flywaydb:flyway-database-postgresql:11.17.1")
+    }
+}
+
 plugins {
 	java
 	id("org.springframework.boot") version "3.5.8"
@@ -42,4 +51,11 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+flyway {
+    url = "jdbc:postgresql://localhost:5432/journeysensedb"
+    user = "admin"
+    password = "password"
+    locations = arrayOf("classpath:db/migration")
 }
