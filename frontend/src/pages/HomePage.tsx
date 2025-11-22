@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import { Button } from 'primereact/button';
 import { Avatar } from 'primereact/avatar';
 
+import "./HomePage.css";
+
 const HomePage: React.FC = () => {
     const navigate = useNavigate();
 
@@ -18,8 +20,7 @@ const HomePage: React.FC = () => {
     return (
         <div className="min-h-screen" style={{ backgroundColor: '#0a0a0f' }}>
             {/* Navigation Bar */}
-            <nav className="flex justify-content-between align-items-center px-6 py-4"
-                 style={{ backgroundColor: '#13131a', borderBottom: '1px solid #1f1f2e' }}>
+            <nav className="flex justify-content-between align-items-center navbar">
                 <div className="flex align-items-center gap-6">
                     <h1 className="text-3xl font-bold m-0" style={{ color: '#6366f1' }}>
                         Share&View
@@ -33,12 +34,28 @@ const HomePage: React.FC = () => {
                         <a href="#" className="text-gray-300 hover:text-white transition-colors no-underline">Other's Work</a>
                     </div>
                 </div>
+        <div className="leftside-controls">
+
+            <div className="user-wrapper">
+                <Avatar
+                    label={user.username ? user.username[0].toUpperCase() : 'U'}
+                    size="large"
+                    shape="circle"
+                    style={{ backgroundColor: '#6366f1', color: 'white' }}
+                />
+                <div>
+                    <p className="text-white font-bold m-0 text-lg">{user.username || 'User'}</p>
+                </div>
+            </div>
+
                 <Button
                     label="Logout"
                     icon="pi pi-sign-out"
                     onClick={handleLogout}
                     className="p-button-text p-button-plain text-gray-300 hover:text-white"
                 />
+        </div>
+
             </nav>
 
             {/* Main Content */}
