@@ -3,15 +3,21 @@ import Hubs from './pages/Hubs/Hubs.tsx';
 import Hub from './pages/Hub/Hub.tsx';
 import './App.css'
 import  HomePage from "./pages/HomePage.tsx"
-import {Header} from "./components/Header.tsx";
+// import {Header} from "./components/Header.tsx";
+import LoginPage from "./pages/auth/LoginPage"
+import RegisterPage from "./pages/auth/RegisterPage"
+import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage"
+import { Routes, BrowserRouter, Route, Navigate } from "react-router-dom";
+
 
 function App() {
 
     return (
-        <BrowserRouter>
+        <div>
+            {/*<Header />*/}
+            <BrowserRouter>
             <Routes>
-                <Header />
-                <HomePage />
+                <Route path="/home" element={<HomePage />} />
                 <Route path="/hubs" element={<Hubs />}></Route>
                 <Route path="/hub/:id" element={<Hub />}></Route>
 
@@ -22,6 +28,7 @@ function App() {
                 <Route path="/" element={<Navigate to="/login" replace />} />
             </Routes>
         </BrowserRouter>
+    </div>
     )
 }
 
