@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import NewPostModal from "../../components/NewPostModal.tsx";
+import NavBar from "../../components/NavBar.tsx";
 
 interface Post {
     id: string;
@@ -53,6 +54,8 @@ const YourWork = () => {
     };
 
     return (
+        <>
+        <NavBar/>
         <div className="glass-panel p-4">
             <h1 className="text-2xl text-white mb-4">My Work</h1>
 
@@ -96,6 +99,8 @@ const YourWork = () => {
                 />
             )}
         </div>
+        </>
+
     );
 };
 
