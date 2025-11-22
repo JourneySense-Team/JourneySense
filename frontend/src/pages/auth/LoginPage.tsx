@@ -4,6 +4,8 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 import { Divider } from "primereact/divider";
+import { Message } from "primereact/message";
+import { AuthService } from "../../services/AuthService";
 
 export default function LoginPage() {
     const navigate = useNavigate();
@@ -14,19 +16,36 @@ export default function LoginPage() {
     });
 
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
+        setError("");
+
+        try {
+            await AuthService.login({
+                usernameOrEmail: formData.username,
+                password: formData.password
+            });
+
             navigate("/home");
-        }, 1500);
+            // FIX: Use 'unknown' instead of 'any'
+        } catch (err: unknown) {
+            console.error("Login Error:", err);
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Login failed.");
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     const inputClasses = "w-full py-3 border-round-xl bg-gray-800 border-1 border-gray-700 text-white shadow-input focus:border-primary";
     const inputStyles = { paddingLeft: '3rem' };
-    const iconStyle = { left: '1rem', top: '50%', transform: 'translateY(-50%)', zIndex: 2, fontSize: '1.2rem' };
+    const iconStyle: React.CSSProperties = { left: '1rem', top: '50%', transform: 'translateY(-50%)', zIndex: 2, fontSize: '1.2rem', position: 'absolute' };
 
     return (
         <div className="flex flex-column md:flex-row h-screen w-full overflow-hidden bg-gray-900">
@@ -61,17 +80,19 @@ export default function LoginPage() {
                         <p className="text-gray-400">Please sign in to your hub.</p>
                     </div>
 
+                    {error && <Message severity="error" text={error} className="w-full mb-4" />}
+
                     <form onSubmit={handleSubmit} className="flex flex-column gap-4 p-fluid">
 
                         <div className="field mb-0">
-                            <label htmlFor="username" className="block text-gray-300 font-medium mb-2 text-center">Username</label>
+                            <label htmlFor="username" className="block text-gray-300 font-medium mb-2 text-center">Username or Email</label>
                             <div className="relative w-full">
                                 <i className="pi pi-user absolute text-gray-400" style={iconStyle}></i>
                                 <InputText
                                     id="username"
                                     value={formData.username}
                                     onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-                                    placeholder="Enter username"
+                                    placeholder="Enter username or email"
                                     className={inputClasses}
                                     style={inputStyles}
                                 />
@@ -81,7 +102,6 @@ export default function LoginPage() {
                         <div className="field mb-0">
                             <div className="flex align-items-center justify-content-center relative mb-2">
                                 <label htmlFor="password" className="block text-gray-300 font-medium">Password</label>
-                                {/* ADDED onClick HANDLER HERE */}
                                 <span
                                     className="text-sm text-primary cursor-pointer hover:text-white transition-colors absolute right-0"
                                     onClick={() => navigate('/forgot-password')}
