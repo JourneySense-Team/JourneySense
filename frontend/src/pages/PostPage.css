@@ -181,9 +181,12 @@
     background: var(--bg-secondary);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 2rem;
     position: relative;
-    min-height: 600px;
+    /* FIXED HEIGHT is mandatory for PDF scrolling to work */
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* This cuts off the PDF if it tries to stick out */
 }
 
 .pp-viewer-toolbar {
@@ -316,6 +319,12 @@
     font-size: 0.75rem; font-weight: 600; color: white;
 }
 .pp-comment-text { font-size: 0.875rem; line-height: 1.5; color: var(--text-secondary); margin-left: 2rem; }
+.pp-pdf-container {
+    flex: 1; /* Take all remaining height below toolbar */
+    position: relative;
+    overflow: auto; /* Allow native scrolling */
+    background: #525659; /* Standard PDF viewer grey background */
+}
 
 /* Responsiveness */
 @media (max-width: 1400px) {
