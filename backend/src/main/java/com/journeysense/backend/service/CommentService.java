@@ -5,7 +5,7 @@ import com.journeysense.backend.model.Comment;
 import com.journeysense.backend.model.Post;
 import com.journeysense.backend.model.User;
 import com.journeysense.backend.repository.CommentRepository;
-import com.journeysense.backend.repository.PostRepository;
+import com.journeysense.backend.repository.PostsRepository;
 import com.journeysense.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
-    private final PostRepository postRepository;
+    private final PostsRepository postsRepository;
 
     @Transactional(readOnly = true)
     public List<CommentDTO> getAll() {
@@ -37,7 +37,7 @@ public class CommentService {
     public CommentDTO create(CommentDTO commentDTO) {
         Comment comment = new Comment();
         User author = userRepository.findById(commentDTO.authorId()).orElseThrow(() -> new RuntimeException("Author not found"));
-        Post post = postRepository.findById(commentDTO.postId()).orElseThrow(() -> new RuntimeException("Post not found"));
+        Post post = postsRepository.findById(commentDTO.postId()).orElseThrow(() -> new RuntimeException("Post not found"));
 
         comment.setText(commentDTO.text());
         comment.setAuthor(author);

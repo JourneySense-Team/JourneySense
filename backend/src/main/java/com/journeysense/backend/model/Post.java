@@ -44,10 +44,6 @@ public class Post {
     private String description;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private PostType type;
-
-    @Enumerated(EnumType.STRING)
     @Column
     private TagType tag;
 
@@ -55,9 +51,6 @@ public class Post {
 
     @Builder.Default
     private LocalDateTime createdAt = LocalDateTime.now();
-
-    @Column(columnDefinition = "boolean default false")
-    private boolean isTeacherEndorsed;
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -70,6 +63,4 @@ public class Post {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Comment> comments = new ArrayList<>();
-
-    public enum PostType { QUESTION, NOTE, RESOURCE, DISCUSSION }
 }

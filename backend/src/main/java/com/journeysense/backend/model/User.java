@@ -20,6 +20,8 @@ import lombok.ToString;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Getter
@@ -69,7 +71,7 @@ public class User implements Serializable {
     @Builder.Default
     private Role role = Role.APPRENTICE;
 
-    /*
+
     @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private List<Friendship> sentFriendRequests = new ArrayList<>();
@@ -84,12 +86,12 @@ public class User implements Serializable {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private Set<UserBadges> userBadges = new HashSet<>();
+    private Set<UserBadge> userBadges = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
-    private Set<Post> posts = new ArrayList<>();
-    */
+    private List<Post> posts = new ArrayList<>();
+
 
     public enum Role {
         ADMIN, HUBMASTER, APPRENTICE
