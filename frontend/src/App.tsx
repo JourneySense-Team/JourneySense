@@ -2,16 +2,16 @@ import "primeicons/primeicons.css";
 import Hubs from './pages/Hubs/Hubs.tsx';
 import Hub from './pages/Hub/Hub.tsx';
 import './App.css'
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import LoginPage from "./pages/auth/LoginPage";
-import RegisterPage from "./pages/auth/RegisterPage";
-import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage"; // Import the new page
+import  HomePage from "./pages/HomePage.tsx"
+import {Header} from "./components/Header.tsx";
 
 function App() {
 
     return (
         <BrowserRouter>
             <Routes>
+                <Header />
+                <HomePage />
                 <Route path="/hubs" element={<Hubs />}></Route>
                 <Route path="/hub/:id" element={<Hub />}></Route>
 
