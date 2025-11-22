@@ -148,37 +148,7 @@ const HomePage: React.FC = () => {
                             />
                         </div>
 
-                        {/* User Info Card at Bottom */}
-                        <div
-                            className="p-4 border-round-xl mt-6"
-                            style={{
-                                backgroundColor: '#1a1a2e',
-                                border: '1px solid #2a2a3e',
-                            }}
-                        >
-                            <div className="flex align-items-center gap-3 mb-3">
-                                <Avatar
-                                    label={user.username ? user.username[0].toUpperCase() : 'U'}
-                                    size="large"
-                                    shape="circle"
-                                    style={{ backgroundColor: '#6366f1', color: 'white' }}
-                                />
-                                <div>
-                                    <p className="text-white font-bold m-0 text-lg">{user.username || 'User'}</p>
-                                    <p className="text-gray-400 text-sm m-0">{user.email || 'user@example.com'}</p>
-                                </div>
-                            </div>
-                            <div className="flex gap-2">
-                                <div className="flex-1 text-center p-2 border-round" style={{ backgroundColor: '#13131a' }}>
-                                    <p className="text-gray-400 text-xs m-0 mb-1">Role</p>
-                                    <p className="text-white font-semibold m-0">{user.role || 'USER'}</p>
-                                </div>
-                                <div className="flex-1 text-center p-2 border-round" style={{ backgroundColor: '#13131a' }}>
-                                    <p className="text-gray-400 text-xs m-0 mb-1">Status</p>
-                                    <p className="text-green-400 font-semibold m-0">Active</p>
-                                </div>
-                            </div>
-                        </div>
+ 
                     </div>
                 </div>
             </div>
