@@ -34,6 +34,7 @@ import java.util.stream.Collectors;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/posts")
+@CrossOrigin("*")
 public class PostsController {
     private final PostsService postsService;
     private final FileService fileService;
