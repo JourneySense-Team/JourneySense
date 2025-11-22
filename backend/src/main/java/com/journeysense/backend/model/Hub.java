@@ -48,7 +48,7 @@ public class Hub {
     private boolean isPrivate = false;
 
     @Setter
-    @Column(nullable = false)
+    @Column(nullable = true)
     private String password;
 
     @ElementCollection

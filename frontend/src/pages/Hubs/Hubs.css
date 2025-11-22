@@ -1,0 +1,124 @@
+    /* ================================
+       Hubs Page Header
+    ================================ */
+    .hubs-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 1.5rem 0 1.5rem;
+    }
+
+    .hubs-header h2 {
+        margin: 0;
+        font-size: 1.8rem;
+        font-weight: 600;
+    }
+
+    /* ================================
+        Grid Layout
+    ================================ */
+    .hubs-grid {
+        display: grid;
+        /* Force exactly 3 columns. 1fr means "1 fraction of available space" */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1.5rem;
+        padding: 1.5rem 10rem 10rem;
+    }
+
+    /* Optional: Make it responsive so it doesn't break on smaller laptops/tablets */
+    @media (max-width: 1200px) {
+        .hubs-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 768px) {
+        .hubs-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ================================
+       Hub Card Content Layout
+    ================================ */
+    .hub-card-content {
+        display: flex;
+        align-items: flex-start; /* Align Avatar to the top-left, not center */
+        gap: 1rem;
+        height: 100%;
+    }
+
+    /* ================================
+       Hub Information
+    ================================ */
+    .hub-info {
+        display: flex;
+        flex-direction: column; /* Stack Title, Desc, and Tag vertically */
+        justify-content: space-between;
+        width: 100%;
+        gap: 0.5rem; /* Spacing between elements */
+    }
+
+    .hub-info h3 {  /* Name of the Hub */
+        margin: 0;
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+
+    .hub-info small { /* SubName of the Hub */
+        display: block;
+        font-size: 1.2rem;
+        opacity: 0.8;
+        margin-bottom: 0.5rem; /* Push the tag down slightly */
+    }
+
+    /* Private icon row */
+    .hub-info i {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* ================================
+       Hub Card
+    ================================ */
+    .hub-card {
+        border-radius: 14px !important;
+        padding: 1rem !important;
+        cursor: pointer;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15) !important;
+    }
+
+    .hub-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22) !important;
+    }
+
+    /* Remove default PrimeReact padding inside the card */
+    .p-card-body {
+        padding: 0 !important;
+    }
+
+    /* ================================
+       Hub Card Content Layout
+    ================================ */
+    .hub-card-content {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    /* ================================
+       Dialog Form Styles
+    ================================ */
+    .p-dialog .p-fluid label {
+        font-weight: 600;
+        margin-bottom: 0.3rem;
+        display: block;
+    }
+
+    .p-dialog input[type="text"],
+    .p-dialog input[type="password"] {
+        width: 100%;
+    }
+
