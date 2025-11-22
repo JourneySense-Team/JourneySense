@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,14 +26,15 @@ import java.util.UUID;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "posts")
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "uuid DEFAULT gen_random_uuid()", updatable = false, nullable = false)
+    @GeneratedValue
+    @Column(updatable = false, nullable = false, columnDefinition = "UUID DEFAULT gen_random_uuid()")
     private UUID id;
 
     @Column(nullable = false)
@@ -44,6 +46,10 @@ public class Post {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private PostType type;
+
+    @Enumerated(EnumType.STRING)
+    @Column
+    private TagType tag;
 
     private String fileUrl;
 

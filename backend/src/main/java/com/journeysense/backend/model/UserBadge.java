@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
@@ -26,14 +27,16 @@ import java.util.UUID;
 @Table(name = "user_badges")
 public class UserBadge {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "uuid DEFAULT gen_random_uuid()", updatable = false, nullable = false)
+    @GeneratedValue
+    @Column(updatable = false, nullable = false, columnDefinition = "UUID DEFAULT gen_random_uuid()")
     private UUID id;
 
+    @Setter
     @ManyToOne(optional = false)
     @JoinColumn(name = "user_id")
     private User user;
 
+    @Setter
     @ManyToOne(optional = false)
     @JoinColumn(name = "badge_id")
     private Badge badge;

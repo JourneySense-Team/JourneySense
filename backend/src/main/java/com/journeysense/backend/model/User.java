@@ -32,8 +32,8 @@ import java.util.UUID;
 public class User implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(columnDefinition = "uuid DEFAULT gen_random_uuid()", updatable = false, nullable = false)
+    @GeneratedValue
+    @Column(updatable = false, nullable = false, columnDefinition = "UUID DEFAULT gen_random_uuid()")
     private UUID id;
 
     @Setter
@@ -64,6 +64,7 @@ public class User implements Serializable {
     @Column(nullable = false)
     private int experience;
 
+    @Setter
     @Enumerated(EnumType.STRING)
     @Builder.Default
     private Role role = Role.APPRENTICE;
