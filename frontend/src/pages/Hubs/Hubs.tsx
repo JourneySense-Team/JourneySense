@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom'
 import { Card } from 'primereact/card';
 import { Dialog } from 'primereact/dialog';
 import { Button } from 'primereact/button';
@@ -39,6 +40,8 @@ export default function Hubs() {
         { label: 'Intermediate', value: 'INTERMEDIATE' },
         { label: 'Advanced', value: 'ADVANCED' }
     ];
+
+    const navigate = useNavigate();
 
     // --------------------------------------------------
     // LOAD HUBS
@@ -140,8 +143,7 @@ export default function Hubs() {
                         <Card
                             key={hub.id}
                             className="hub-card"
-                            onClick={() => console.log('Open hub', hub.id)}
-                        >
+                            onClick={() => navigate(`/hub/${hub.id}`)}                        >
                             <div className="hub-card-content">
                                 <Avatar
                                     label={getInitials(hub.name)}
