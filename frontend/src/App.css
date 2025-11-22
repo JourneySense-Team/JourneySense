@@ -1,3 +1,8 @@
+/* Comment out @tailwind base to avoid conflicts */
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
 /* index.css or App.css */
 html,
 body,
@@ -6,6 +11,7 @@ body,
   margin: 0;
   background-color: var(--surface-ground); /* from the theme */
   color: var(--text-color); /* ensures contrast */
+  width: 100%;
 }
 
 .layout-content {
@@ -20,7 +26,7 @@ body,
 }
 
 .p-button.p-button-outlined.p-button-faint-gray:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.1); /* gray-600 */
   color: white;
 }
