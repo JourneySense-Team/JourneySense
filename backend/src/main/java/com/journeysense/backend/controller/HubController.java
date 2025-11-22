@@ -13,7 +13,6 @@ import java.util.UUID;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/hubs")
-@CrossOrigin("*")
 public class HubController {
 
     private final HubService hubService;

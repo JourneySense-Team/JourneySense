@@ -24,7 +24,7 @@ interface HubDTO {
 export default function Hubs() {
     const [hubs, setHubs] = useState<HubDTO[]>([]);
     const [loading, setLoading] = useState(true);
-    const toast = useRef<any>(null);
+    const toast = useRef<Toast>(null);
 
     // Create Hub dialog states
     const [showDialog, setShowDialog] = useState(false);
