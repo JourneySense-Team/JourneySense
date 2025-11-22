@@ -1,0 +1,55 @@
+/* ================================
+   Main Page Layout
+================================ */
+.hub-page-container {
+    padding: 2rem;
+    max-width: 1200px; /* Keeps table from stretching too wide on huge screens */
+    margin: 0 auto;
+}
+
+/* ================================
+   Header
+================================ */
+.hubs-header {
+    margin-bottom: 1.5rem; /* Adds space between Title and Table */
+}
+
+.hubs-header h2 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: white; /* Ensure text is visible */
+}
+
+/* ================================
+   The Table Card (The Container)
+================================ */
+.hub-table-card {
+    /* Round corners */
+    border-radius: 12px;
+
+    /* Padding inside the card */
+    padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+
+    /* Subtle border to define the edges */
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    /* Shadow for depth */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* ================================
+   Table Styling Adjustments
+================================ */
+
+/* Remove default PrimeReact borders so it blends into the card */
+.hub-table-card .p-datatable .p-datatable-header,
+.hub-table-card .p-datatable .p-datatable-thead > tr > th,
+.hub-table-card .p-datatable .p-datatable-tbody > tr > td,
+.hub-table-card .p-datatable .p-paginator-bottom {}
+
+/* Style the Paginator (bottom buttons) to look integrated */
+.hub-table-card .p-paginator {
+    background: transparent;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}

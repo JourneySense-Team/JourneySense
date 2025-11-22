@@ -1,5 +1,6 @@
 import "primeicons/primeicons.css";
 import Hubs from './pages/Hubs/Hubs.tsx';
+import Hub from './pages/Hub/Hub.tsx';
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import LoginPage from "./pages/auth/LoginPage";
@@ -12,6 +13,7 @@ function App() {
         <BrowserRouter>
             <Routes>
                 <Route path="/hubs" element={<Hubs />}></Route>
+                <Route path="/hub/:id" element={<Hub />}></Route>
 
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegisterPage />} />
