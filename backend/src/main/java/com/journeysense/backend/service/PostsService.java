@@ -74,6 +74,13 @@ public class PostsService {
         postsRepository.deleteById(id);
     }
 
+    public List<PostDTO> getPostsByHub(Hub hubId) {
+        return postsRepository.findByHubId(hubId)
+                .stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
     private PostDTO toDTO(Post post) {
         return new PostDTO(
                 post.getId(),
