@@ -11,6 +11,6 @@ import PostPage from './pages/PostPage.tsx'
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <PostPage/>
+    <App/>
   </React.StrictMode>,
 )
