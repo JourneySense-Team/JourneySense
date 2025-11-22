@@ -16,19 +16,19 @@ function App() {
         <div>
             {/*<Header />*/}
             <BrowserRouter>
-            <Routes>
-                <Route path="/home" element={<HomePage />} />
-                <Route path="/hubs" element={<Hubs />}></Route>
-                <Route path="/hub/:id" element={<Hub />}></Route>
+                <Routes>
+                    <Route path="/home" element={<HomePage />} />
+                    <Route path="/hubs" element={<Hubs />}></Route>
+                    <Route path="/hub/:id" element={<Hub />}></Route>
 
-                <Route path="/login" element={<LoginPage />} />
-                <Route path="/register" element={<RegisterPage />} />
-                <Route path="/forgot-password" element={<ForgotPasswordPage />} /> {/* Add this line */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/forgot-password" element={<ForgotPasswordPage />} /> {/* Add this line */}
 
-                <Route path="/" element={<Navigate to="/login" replace />} />
-            </Routes>
-        </BrowserRouter>
-    </div>
+                    <Route path="/" element={<Navigate to="/login" replace />} />
+                </Routes>
+            </BrowserRouter>
+        </div>
     )
 }
 

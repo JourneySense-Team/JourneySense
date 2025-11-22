@@ -6,7 +6,7 @@ export interface RegisterRequest {
     username: string;
     email: string;
     password: string;
-    role: "APPRENTICE" | "HUBMASTER" | "ADMIN"; // Strict Union Type
+    role: "APPRENTICE" | "HUBMASTER" | "ADMIN";
 }
 
 export interface LoginRequest {
@@ -39,10 +39,17 @@ class AuthenticationService {
             throw new Error(errorText || 'Login failed');
         }
 
-        const data = await response.json();
+        const data: AuthResponse = await response.json();
+
         if (data.token) {
-            localStorage.setItem('token', data.token);
-            localStorage.setItem('user', JSON.stringify(data));
+            // 1. Destructure to extract the token
+            const { token, ...userData } = data;
+
+            // 2. Save token separately (standard practice)
+            localStorage.setItem('token', token);
+
+            // 3. Save user data WITHOUT the token to avoid redundancy/leakage
+            localStorage.setItem('user', JSON.stringify(userData));
         }
         return data;
     }
