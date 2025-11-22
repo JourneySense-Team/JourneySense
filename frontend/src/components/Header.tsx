@@ -3,14 +3,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { AuthService } from '../services/AuthService';
-// FIX: Use 'import type' for the CurrentUser interface
 import type { CurrentUser } from '../services/AuthService';
 import { Button } from 'primereact/button';
 
 export const Header: React.FC = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    // Use the explicit CurrentUser type
     const [user, setUser] = useState<CurrentUser | null>(null);
 
     // Routes where the header should be hidden
@@ -18,15 +16,12 @@ export const Header: React.FC = () => {
     const shouldHide = hiddenRoutes.includes(location.pathname);
 
     useEffect(() => {
-        // FIX: Wrap the state update in a function inside the effect
-        // to appease the 'react-hooks/set-state-in-effect' linter rule.
         const syncUserState = () => {
             const currentUser = AuthService.getCurrentUser();
             setUser(currentUser);
         }
         syncUserState();
-
-    }, [location]); // Keep [location] dependency to update on route change (e.g., after login redirect)
+    }, [location]);
 
     const handleLogout = () => {
         AuthService.logout();
@@ -68,7 +63,6 @@ export const Header: React.FC = () => {
                                     <span className="text-xs text-gray-400 uppercase">{user.role}</span>
                                 </div>
                                 <div className="h-8 w-8 rounded-full bg-indigo-600 flex items-center justify-center text-white font-bold border border-indigo-400 cursor-pointer hover:bg-indigo-500 transition-colors">
-                                    {/* Using optional chaining for safety, defaulting to username initial */}
                                     {user.firstName ? user.firstName[0] : user.username[0]}
                                 </div>
                                 <Button

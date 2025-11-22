@@ -12,6 +12,17 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 
+// Protected Route Component
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+        return <Navigate to="/login" replace />;
+    }
+
+    return <>{children}</>;
+}
+
 function App() {
     return (
         <div>
@@ -31,6 +42,26 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+
+                    {/* Protected Routes */}
+                    <Route path="/" element={
+                        <ProtectedRoute>
+                            <HomePage />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/home" element={<Navigate to="/" replace />} />
+
+                    <Route path="/hubs" element={
+                        <ProtectedRoute>
+                            <Hubs />
+                        </ProtectedRoute>
+                    } />
+
+                    <Route path="/hub/:id" element={
+                        <ProtectedRoute>
+                            <Hub />
+                        </ProtectedRoute>
+                    } />
 
                     {/* Fallback */}
                     <Route path="*" element={<Navigate to="/" replace />} />
