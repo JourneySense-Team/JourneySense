@@ -1,5 +1,16 @@
 // src/services/AuthService.ts
 
+// NEW INTERFACE for the object stored in localStorage
+// FIX: Ensure 'export' is present
+export interface CurrentUser {
+    userId: string;
+    username: string;
+    email: string;
+    role: string;
+    // Assuming firstName is needed for the header/homepage display
+    firstName?: string;
+}
+
 export interface RegisterRequest {
     firstName: string;
     lastName: string;
@@ -20,6 +31,9 @@ export interface AuthResponse {
     username: string;
     email: string;
     role: string;
+    // Assuming firstName/lastName are part of the initial response for convenience
+    firstName?: string;
+    lastName?: string;
 }
 
 const API_URL = "http://localhost:8080/api/auth";
@@ -80,9 +94,13 @@ class AuthenticationService {
         localStorage.removeItem('user');
     }
 
-    getCurrentUser() {
+    // Explicitly type the return value
+    getCurrentUser(): CurrentUser | null {
         const userStr = localStorage.getItem('user');
-        if (userStr) return JSON.parse(userStr);
+        if (userStr) {
+            // Cast the parsed JSON to the defined type
+            return JSON.parse(userStr) as CurrentUser;
+        }
         return null;
     }
 }
