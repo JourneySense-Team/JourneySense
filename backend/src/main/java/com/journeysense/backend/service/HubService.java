@@ -33,6 +33,9 @@ public class HubService {
         hub.setName(hubDTO.name());
         hub.setDescription(hubDTO.description());
         hub.setPrivate(hubDTO.isPrivate());
+        if (!hub.isPrivate()) {
+            hub.setPassword(null);
+        }
         hub.setTags(hubDTO.tags());
         return toDTO(hubRepository.save(hub));
     }

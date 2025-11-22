@@ -1,10 +1,16 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import './index.css'
-import PostPage from "./PostPage.tsx";
+import App from './App.tsx'
+import './index.css'
 
-createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <PostPage />
-  </StrictMode>,
+import "primereact/resources/themes/bootstrap4-dark-purple/theme.css";
+import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
+import "primeflex/primeflex.css";
+
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>,
 )
