@@ -68,7 +68,16 @@ public class User implements Serializable {
     @Builder.Default
     private Role role = Role.APPRENTICE;
 
-    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*
+    @OneToMany(mappedBy = "requester", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Friendship> sentFriendRequests = new ArrayList<>();
+
+    @OneToMany(mappedBy = "addressee", cascade = CascadeType.ALL, orphanRemoval = true)
+    @Builder.Default
+    private List<Friendship> receivedFriendRequests = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     @Builder.Default
     private Set<HubMembership> hubMemberships = new HashSet<>();
 
