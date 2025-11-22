@@ -10,16 +10,10 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 
-// Components
-import { Header } from "./components/Header.tsx";
-
 function App() {
     return (
         <div>
             <BrowserRouter>
-                {/* Header checks location internally to hide on login/register pages */}
-                <Header />
-
                 <Routes>
                     {/* Main Workflow */}
                     <Route path="/" element={<HomePage />} />
