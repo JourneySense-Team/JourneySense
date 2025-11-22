@@ -1,3 +1,6 @@
+@import "primereact/resources/themes/bootstrap4-dark-purple/theme.css";
+@import "primereact/resources/primereact.min.css";
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
