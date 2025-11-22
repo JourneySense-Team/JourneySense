@@ -12,15 +12,11 @@ const PostPage: React.FC = () => {
     const [activeHighlightId, setActiveHighlightId] = useState<string | null>(null);
 
     // Mock File
-    const pdfUrl = "/Laborator2.pdf"; // Ensure this exists in /public
+    const pdfUrl = "/44.pdf"; // Ensure this exists in /public
 
     return (
         <div className="pp-wrapper">
             <div className="pp-container">
-
-                {/* Left Sidebar (Hubs) - Kept simpler for this example */}
-                <div className="pp-hub-sidebar">Hubs...</div>
-
                 {/* CENTER: The Viewer */}
                 <main className="pp-main-content">
                     <div className="pp-post-header">
@@ -47,11 +43,10 @@ const PostPage: React.FC = () => {
                 <CommentSidebar
                     highlights={highlights}
                     activeId={activeHighlightId}
-                    // When sidebar card is clicked, scroll PDF to that spot
                     onCommentClick={(id) => {
-                        setActiveHighlightId(id);
-                        // We force a hash update to ensure the library catches the scroll event if needed
-                        window.location.hash = `#highlight-${id}`;
+                        // 1. Just update the state. 
+                        // The PdfReviewer component will react to this change.
+                        setActiveHighlightId(id); 
                     }}
                 />
 

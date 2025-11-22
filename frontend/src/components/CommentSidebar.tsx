@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react'; // 1. Import useEffect
 import type { IHighlight } from "react-pdf-highlighter";
 
 interface Props {
@@ -8,6 +8,17 @@ interface Props {
 }
 
 export const CommentSidebar: React.FC<Props> = ({ highlights, activeId, onCommentClick }) => {
+
+    // 2. ADD THIS EFFECT: This watches for changes and scrolls the sidebar
+    useEffect(() => {
+        if (activeId) {
+            const element = document.getElementById(`comment-card-${activeId}`);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    }, [activeId]);
+
     return (
         <div className="pp-comment-sidebar">
             <div className="pp-comment-sidebar-header">
@@ -24,6 +35,10 @@ export const CommentSidebar: React.FC<Props> = ({ highlights, activeId, onCommen
                 {highlights.map((highlight) => (
                     <div
                         key={highlight.id}
+                        
+                        // 3. ADD THIS ID: This allows the useEffect to find this specific box
+                        id={`comment-card-${highlight.id}`} 
+                        
                         onClick={() => onCommentClick(highlight.id)}
                         className={`pp-comment-thread ${activeId === highlight.id ? 'active' : ''}`}
                         style={{ cursor: 'pointer' }}

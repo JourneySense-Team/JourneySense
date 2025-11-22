@@ -3,7 +3,7 @@ html,
 body,
 #root {
     height: 100%;
-    margin: 0;
+    margin: 0 !important;
     background-color: var(--surface-ground); /* from the theme */
     color: var(--text-color); /* ensures contrast */
 }
