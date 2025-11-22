@@ -1,6 +1,7 @@
 package com.journeysense.backend.controller;
 
 import com.journeysense.backend.dto.HubDTO;
+import com.journeysense.backend.dto.UserDTO;
 import com.journeysense.backend.service.HubService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -45,5 +46,10 @@ public class HubController {
     public ResponseEntity<Void> deleteHub(@PathVariable UUID id) {
         hubService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{id}/members")
+    public ResponseEntity<List<UserDTO>> getMembers(@PathVariable UUID id) {
+        return ResponseEntity.ok(hubService.getHubMembers(id));
     }
 }

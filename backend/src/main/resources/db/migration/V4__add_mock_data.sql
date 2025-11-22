@@ -1,15 +1,14 @@
  -- Mock data for JourneySense
 
 -- Insert mock users
-INSERT INTO users (id, first_name, last_name, username, email, password, level, experience, role)
-VALUES
-    ('a1b2c3d4-e5f6-7890-1234-567890abcdef', 'John', 'Doe', 'johndoe', 'john.doe@example.com', 'cassword123', 5, 500, 'USER'),
-    ('b2c3d4e5-f6a7-8901-2345-67890abcdef0', 'Jane', 'Smith', 'janesmith', 'jane.smith@example.com', 'cassword456', 3, 250, 'USER'),
-    ('c3d4e5f6-a7b8-9012-3456-7890abcdef01', 'Admin', 'User', 'admin', 'admin@example.com', 'adminpass', 10, 1000, 'ADMIN'),
-    ('d4e5f6a7-b8c9-0123-4567-890abcdef012', 'ceter', 'Jones', 'ceterjones', 'ceter.jones@example.com', 'ceterpass', 1, 50, 'USER'),
-    ('e5f6a7b8-c9d0-1234-5678-90abcdef0123', 'bary', 'Jane', 'baryjane', 'bary.jane@example.com', 'bary-pass', 2, 120, 'USER'),
-    ('f6a7b8c9-d0e1-2345-6789-0abcdef01234', 'Chris', 'Green', 'chrisgreen', 'chris.green@example.com', 'chris-pass', 4, 340, 'USER');
-
+ INSERT INTO users (id, first_name, last_name, username, email, password, level, experience, role)
+ VALUES
+     ('a1b2c3d4-e5f6-7890-1234-567890abcdef', 'John', 'Doe', 'johndoe', 'john.doe@example.com', '$2a$12$mHUgry9UaFy64RgD9nS4nu8FE.K2cZHDTvZAJG9KbKXjBCkA14926', 5, 500, 'USER'),
+     ('b2c3d4e5-f6a7-8901-2345-67890abcdef0', 'Jane', 'Smith', 'janesmith', 'jane.smith@example.com', '$2a$12$mHUgry9UaFy64RgD9nS4nu8FE.K2cZHDTvZAJG9KbKXjBCkA14926', 3, 250, 'USER'),
+     ('c3d4e5f6-a7b8-9012-3456-7890abcdef01', 'Admin', 'User', 'admin', 'admin@example.com', '$2a$12$mHUgry9UaFy64RgD9nS4nu8FE.K2cZHDTvZAJG9KbKXjBCkA14926', 10, 1000, 'ADMIN'),
+     ('d4e5f6a7-b8c9-0123-4567-890abcdef012', 'Peter', 'Jones', 'peterjones', 'peter.jones@example.com', '$2a$12$mHUgry9UaFy64RgD9nS4nu8FE.K2cZHDTvZAJG9KbKXjBCkA14926', 1, 50, 'USER'),
+     ('e5f6a7b8-c9d0-1234-5678-90abcdef0123', 'Mary', 'Jane', 'maryjane', 'mary.jane@example.com', '$2a$12$mHUgry9UaFy64RgD9nS4nu8FE.K2cZHDTvZAJG9KbKXjBCkA14926', 2, 120, 'USER'),
+     ('f6a7b8c9-d0e1-2345-6789-0abcdef01234', 'Chris', 'Green', 'chrisgreen', 'chris.green@example.com', '$2a$12$mHUgry9UaFy64RgD9nS4nu8FE.K2cZHDTvZAJG9KbKXjBCkA14926', 4, 340, 'USER');
 
 -- Insert mock hubs
 INSERT INTO hubs (id, name, description, is_private, password)

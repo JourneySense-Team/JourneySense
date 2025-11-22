@@ -29,15 +29,17 @@ public class UserService {
 
     @Transactional
     public UserDTO create(UserDTO userDTO) {
-        User user = new User();
-        user.setFirstName(userDTO.firstName());
-        user.setLastName(userDTO.lastName());
-        user.setUsername(userDTO.username());
-        user.setEmail(userDTO.email());
-        user.setLevel(userDTO.level());
-        user.setExperience(userDTO.experience());
-        user.setRole(userDTO.role());
-        return toDTO(userRepository.save(user));
+        User newUser = User.builder()
+                .firstName(userDTO.firstName())
+                .lastName(userDTO.lastName())
+                .username(userDTO.username())
+                .password(userDTO.password())
+                .email(userDTO.email())
+                .level(userDTO.level())
+                .experience(userDTO.experience())
+                .role(userDTO.role())
+                .build();
+        return toDTO(userRepository.save(newUser));
     }
 
     @Transactional
@@ -64,6 +66,7 @@ public class UserService {
                 user.getFirstName(),
                 user.getLastName(),
                 user.getUsername(),
+                user.getPassword(),
                 user.getEmail(),
                 user.getLevel(),
                 user.getExperience(),
