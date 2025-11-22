@@ -4,15 +4,16 @@ import { Button } from "primereact/button";
 import { Dropdown } from "primereact/dropdown";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
+import { Message } from "primereact/message";
+// FIX: Use 'type' for the interface import
+import { AuthService, type RegisterRequest } from "../../services/AuthService";
 
-// --- TYPES ---
 type RoleOption = {
     label: string;
-    value: string;
+    value: "APPRENTICE" | "HUBMASTER" | "ADMIN";
     icon: string;
 };
 
-// --- HELPER COMPONENTS ---
 const SectionHeader = ({ icon, title }: { icon: string, title: string }) => (
     <div className="col-12 mb-2 mt-1">
         <h3 className="text-white m-0 flex align-items-center justify-content-center text-lg font-semibold">
@@ -33,8 +34,7 @@ const SectionHeader = ({ icon, title }: { icon: string, title: string }) => (
 export default function RegisterPage() {
     const navigate = useNavigate();
 
-    // --- STATE ---
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<RegisterRequest & { confirmPassword: string }>({
         firstName: "",
         lastName: "",
         username: "",
@@ -45,27 +45,51 @@ export default function RegisterPage() {
     });
 
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
 
-    // --- OPTIONS ---
     const roleOptions: RoleOption[] = [
         { label: "Apprentice (Student)", value: "APPRENTICE", icon: 'pi pi-book' },
         { label: "Hubmaster (Teacher)", value: "HUBMASTER", icon: 'pi pi-briefcase' },
         { label: "Administrator", value: "ADMIN", icon: 'pi pi-cog' },
     ];
 
-    // --- STYLES ---
     const inputClasses = "w-full py-3 border-round-xl bg-gray-800 border-1 border-gray-700 text-white shadow-none focus:border-primary transition-colors";
     const inputStyles = { paddingLeft: '2.5rem' };
     const iconStyle: React.CSSProperties = { left: '0.75rem', top: '50%', transform: 'translateY(-50%)', zIndex: 2, fontSize: '1rem', position: 'absolute' };
 
-    // --- HANDLERS ---
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setError("");
+
+        if (formData.password !== formData.confirmPassword) {
+            setError("Passwords do not match.");
+            return;
+        }
+
         setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
+
+        try {
+            await AuthService.register({
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                username: formData.username,
+                email: formData.email,
+                password: formData.password,
+                role: formData.role
+            });
+
             navigate("/login");
-        }, 1500);
+            // FIX: Use 'unknown' instead of 'any'
+        } catch (err: unknown) {
+            console.error("Registration Error:", err);
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("Registration failed.");
+            }
+        } finally {
+            setLoading(false);
+        }
     };
 
     const roleOptionTemplate = (option: RoleOption) => {
@@ -80,15 +104,13 @@ export default function RegisterPage() {
     return (
         <div className="flex flex-column md:flex-row h-screen w-full bg-gray-900 overflow-hidden">
 
-            {/* LEFT SIDE - Branding & Info */}
-            {/* INCREASED WIDTH: md:w-6 (50%) to balance the screen */}
+            {/* LEFT SIDE */}
             <div className="hidden md:flex md:w-6 flex-column p-6 shadow-6 z-2 justify-content-between relative"
                  style={{
                      background: 'radial-gradient(circle at center, #1e1b4b 0%, #0f172a 100%)',
                      borderRight: '1px solid rgba(255,255,255,0.05)'
                  }}>
 
-                {/* Background Overlay */}
                 <div style={{
                     position: 'absolute', width: '100%', height: '100%', top: 0, left: 0,
                     background: 'radial-gradient(circle at 50% 50%, rgba(99,102,241,0.1) 0%, transparent 50%)',
@@ -128,19 +150,19 @@ export default function RegisterPage() {
                 </div>
             </div>
 
-            {/* RIGHT SIDE - Form Area */}
-            {/* REDUCED WIDTH: md:w-6 (50%) */}
+            {/* RIGHT SIDE */}
             <div className="w-full md:w-6 flex align-items-center justify-content-center bg-gray-900 relative overflow-y-auto">
                 <div className="absolute top-0 right-0 w-full h-full opacity-10 pointer-events-none"
                      style={{ background: 'radial-gradient(circle at top right, #6366f1 0%, transparent 40%)' }}>
                 </div>
 
-                {/* REDUCED MAX-WIDTH: 30rem (Compact) */}
                 <div className="w-full max-w-30rem px-4 py-4">
                     <div className="mb-5 text-center">
                         <h2 className="text-3xl font-bold text-white m-0">Create Account</h2>
                         <p className="text-gray-400 m-0 mt-2">Enter your details to get started.</p>
                     </div>
+
+                    {error && <Message severity="error" text={error} className="w-full mb-3" />}
 
                     <form onSubmit={handleSubmit}>
                         <div className="grid formgrid p-fluid">

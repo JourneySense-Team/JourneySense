@@ -3,12 +3,12 @@
 -- Insert mock users
 INSERT INTO users (id, first_name, last_name, username, email, password, level, experience, role)
 VALUES
-    ('a1b2c3d4-e5f6-7890-1234-567890abcdef', 'John', 'Doe', 'johndoe', 'john.doe@example.com', 'cassword123', 5, 500, 'USER'),
-    ('b2c3d4e5-f6a7-8901-2345-67890abcdef0', 'Jane', 'Smith', 'janesmith', 'jane.smith@example.com', 'cassword456', 3, 250, 'USER'),
-    ('c3d4e5f6-a7b8-9012-3456-7890abcdef01', 'Admin', 'User', 'admin', 'admin@example.com', 'adminpass', 10, 1000, 'ADMIN'),
-    ('d4e5f6a7-b8c9-0123-4567-890abcdef012', 'ceter', 'Jones', 'ceterjones', 'ceter.jones@example.com', 'ceterpass', 1, 50, 'USER'),
-    ('e5f6a7b8-c9d0-1234-5678-90abcdef0123', 'bary', 'Jane', 'baryjane', 'bary.jane@example.com', 'bary-pass', 2, 120, 'USER'),
-    ('f6a7b8c9-d0e1-2345-6789-0abcdef01234', 'Chris', 'Green', 'chrisgreen', 'chris.green@example.com', 'chris-pass', 4, 340, 'USER');
+    ('a1b2c3d4-e5f6-7890-1234-567890abcdef', 'John', 'Doe', 'johndoe', 'john.doe@example.com', '$2a$12$V.oVlM2Iq6p9a.Q1k8vN.eR/6fM4fP1J1Z2e4K0B5X7Y8Z9O2S.y', 5, 500, 'USER'),
+    ('b2c3d4e5-f6a7-8901-2345-67890abcdef0', 'Jane', 'Smith', 'janesmith', 'jane.smith@example.com', '$2a$12$B.Z.4F5J6J7K8L9M0N1O2P.Q/7gR5hS6iT7U8V9W0X.yA/B/C/D', 3, 250, 'USER'),
+    ('c3d4e5f6-a7b8-9012-3456-7890abcdef01', 'Admin', 'User', 'admin', 'admin@example.com', '$2a$12$C.D.5E6F7G8H9I0J1K2L3M.N/8oP6qR7sT8U9V0W.xA/B/C/D', 10, 1000, 'ADMIN'),
+    ('d4e5f6a7-b8c9-0123-4567-890abcdef012', 'ceter', 'Jones', 'ceterjones', 'ceter.jones@example.com', '$2a$12$D.E.6F7G8H9I0J1K2L3M4N.O/9pQ7rS8tU9V0W.yB/C/D/E', 1, 50, 'USER'),
+    ('e5f6a7b8-c9d0-1234-5678-90abcdef0123', 'bary', 'Jane', 'baryjane', 'bary.jane@example.com', '$2a$12$E.F.7G8H9I0J1K2L3M4N5O.P/0qR8sT9uV0W.zA/B/C/D', 2, 120, 'USER'),
+    ('f6a7b8c9-d0e1-2345-6789-0abcdef01234', 'Chris', 'Green', 'chrisgreen', 'chris.green@example.com', '$2a$12$F.G.8H9I0J1K2L3M4N5O6P.Q/1rS9tU0vW1X.yB/C/D/E', 4, 340, 'USER');
 
 
 -- Insert mock hubs
