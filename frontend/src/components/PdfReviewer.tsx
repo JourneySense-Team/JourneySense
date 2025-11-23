@@ -4,7 +4,7 @@ import type { IHighlight } from "react-pdf-highlighter";
 import * as pdfjs from 'pdfjs-dist';
 import 'react-pdf-highlighter/dist/style.css';
 
-// Ensure the worker version matches your installed pdfjs-dist version
+// Configure worker
 pdfjs.GlobalWorkerOptions.workerSrc = `https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js`;
 
 interface Props {
@@ -20,7 +20,6 @@ interface CommentFormProps {
     onCancel: () => void;
 }
 
-// --- Comment Form Component (unchanged) ---
 const CommentForm: React.FC<CommentFormProps> = ({ onConfirm, onCancel }) => {
     const [text, setText] = useState("");
 
@@ -32,36 +31,21 @@ const CommentForm: React.FC<CommentFormProps> = ({ onConfirm, onCancel }) => {
                 value={text}
                 onChange={e => setText(e.target.value)}
                 onKeyDown={(e) => {
-                    if (e.key === 'Enter' && e.ctrlKey && text.trim()) {
-                        onConfirm(text);
-                    }
+                    if (e.key === 'Enter' && e.ctrlKey && text.trim()) onConfirm(text);
                 }}
-                style={{
-                    background: '#0a0a0b', color: '#fff', border: '1px solid #333',
-                    padding: '8px', width: '220px', height: '80px', borderRadius: '4px', resize: 'none', outline: 'none'
-                }}
+                style={{ background: '#0a0a0b', color: '#fff', border: '1px solid #333', padding: '8px', width: '220px', height: '80px', borderRadius: '4px', resize: 'none', outline: 'none' }}
             />
             <div style={{ marginTop: '8px', display: 'flex', justifyContent: 'flex-end', gap: '8px' }}>
                 <button onClick={onCancel} style={{ background: 'transparent', border: 'none', color: '#888', cursor: 'pointer', fontSize: '12px' }}>Cancel</button>
-                <button
-                    onClick={() => { if (text.trim()) onConfirm(text); }}
-                    style={{ background: '#00ff88', border: 'none', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 600, color: '#000' }}
-                >
-                    Save
-                </button>
+                <button onClick={() => { if (text.trim()) onConfirm(text); }} style={{ background: '#00ff88', border: 'none', borderRadius: '4px', padding: '6px 12px', cursor: 'pointer', fontWeight: 600, color: '#000' }}>Save</button>
             </div>
         </div>
     );
 };
 
 const PdfReviewer: React.FC<Props> = ({ fileUrl, highlights, activeId, onNewComment, onHighlightClick }) => {
-    const [key, setKey] = useState(0);
     const scrollToHighlightRef = useRef<((highlight: IHighlight) => void) | null>(null);
 
-    // Force re-mount on URL change
-    useEffect(() => setKey(k => k + 1), [fileUrl]);
-
-    // --- SCROLL LOGIC ---
     useEffect(() => {
         if (activeId && scrollToHighlightRef.current) {
             const highlightToScrollTo = highlights.find(h => h.id === activeId);
@@ -74,57 +58,62 @@ const PdfReviewer: React.FC<Props> = ({ fileUrl, highlights, activeId, onNewComm
     return (
         <div className="pp-document-viewer">
             <div className="pp-pdf-container">
-                <PdfLoader 
-                    url={fileUrl} 
+                <PdfLoader
+                    url={fileUrl}
                     beforeLoad={<div>Loading PDF...</div>}
                     errorMessage={<div>Error loading PDF</div>}
-                    key={key}
                 >
                     {(pdfDocument) => (
                         <PdfHighlighter
                             pdfDocument={pdfDocument}
                             enableAreaSelection={(event) => event.altKey}
                             onScrollChange={() => {}}
+
+                            // FIX: Set scale to 0.9 (90%) so it looks "zoomed out" and centered
+                            pdfScaleValue="0.9"
+
                             scrollRef={(scrollTo) => {
                                 scrollToHighlightRef.current = scrollTo;
                             }}
                             highlights={highlights}
-                            
-                            // --- THIS IS THE MISSING PROP ---
-                            onSelectionFinished={(position, content, hideTipAndSelection, transformSelection) => {
-                                return (
-                                    <Popup
-                                        onMouseOver={() => {}}
-                                        onMouseOut={() => {}}
-                                        popupContent={<></>}
-                                    >
-                                        <CommentForm
-                                            onConfirm={(commentText) => {
-                                                const newHighlight: IHighlight = {
-                                                    content,
-                                                    position,
-                                                    comment: { text: commentText, emoji: '' },
-                                                    id: Math.random().toString(36).substring(7),
-                                                };
-                                                onNewComment(newHighlight);
-                                                hideTipAndSelection();
-                                            }}
-                                            onCancel={hideTipAndSelection}
-                                        />
-                                    </Popup>
-                                );
-                            }}
-                            // --------------------------------
 
-                            highlightTransform={(highlight, index, setTip, hideTip, viewportToScaled, screenshot, isScrolledTo) => {
+                            onSelectionFinished={(position, content, hideTipAndSelection) => (
+                                <Popup
+                                    onMouseOver={() => {}}
+                                    onMouseOut={() => {}}
+                                    popupContent={<></>}
+                                >
+                                    <CommentForm
+                                        onConfirm={(commentText) => {
+                                            const newHighlight: IHighlight = {
+                                                content,
+                                                position,
+                                                comment: { text: commentText, emoji: '' },
+                                                id: Math.random().toString(36).substring(7),
+                                            };
+                                            onNewComment(newHighlight);
+                                            hideTipAndSelection();
+                                        }}
+                                        onCancel={hideTipAndSelection}
+                                    />
+                                </Popup>
+                            )}
+
+                            highlightTransform={(highlight, index) => {
                                 const isActive = highlight.id === activeId;
                                 return (
                                     <PdfHighlight
-                                        isScrolledTo={isActive} 
+                                        isScrolledTo={isActive}
                                         position={highlight.position}
                                         comment={highlight.comment}
                                         key={index}
-                                        onClick={() => onHighlightClick(highlight.id)}
+                                        onClick={(event?: React.MouseEvent) => {
+                                            // FIX: Removed preventDefault() to see if it fixes the double-click requirement
+                                            if (event) {
+                                                event.stopPropagation();
+                                            }
+                                            onHighlightClick(highlight.id);
+                                        }}
                                     />
                                 );
                             }}

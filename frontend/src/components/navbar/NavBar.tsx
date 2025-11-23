@@ -17,10 +17,13 @@ const NavBar:React.FC = () => {
     return (<nav className="flex justify-content-between align-items-center navbar">
         <div className="flex align-items-center gap-6">
             <h1 className="text-3xl font-bold m-0" style={{color: '#6366f1'}}>
-                Share&View
+                CoReview
             </h1>
             <div className="flex gap-4 ml-6">
-                <a href="#" className="text-white transition-colors no-underline">Home</a>
+                <a href="#" onClick={(e) => {
+    e.preventDefault();
+    navigate('/');
+}} className="text-white transition-colors no-underline">Home</a>
                 <a href="#" onClick={(e) => {
                     e.preventDefault();
                     navigate('/hubs');
@@ -29,18 +32,21 @@ const NavBar:React.FC = () => {
                 <a href="#"
                    onClick={(e) => {
                        e.preventDefault();
-                       navigate('/review');
-                   }} className="text-gray-300 hover:text-white transition-colors no-underline">Review</a>
+                       navigate('/reviews');
+                   }}
+                   className="text-gray-300 hover:text-white transition-colors no-underline">Review</a>
                 <a href="#"
                    onClick={(e) => {
                        e.preventDefault();
                        navigate('/your-work');
-                   }} className="text-gray-300 hover:text-white transition-colors no-underline">My Work</a>
+                   }}
+                   className="text-gray-300 hover:text-white transition-colors no-underline">My Work</a>
                 <a href="#"
                    onClick={(e) => {
                        e.preventDefault();
                        navigate('/others-work');
-                   }} className="text-gray-300 hover:text-white transition-colors no-underline">Other's Work</a>
+                   }}
+                   className="text-gray-300 hover:text-white transition-colors no-underline">Other's Work</a>
             </div>
         </div>
         <div className="leftside-controls">

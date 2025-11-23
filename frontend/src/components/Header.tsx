@@ -44,7 +44,7 @@ export const Header: React.FC = () => {
                         onClick={() => navigate('/')}
                     >
                         <i className="pi pi-compass text-indigo-500 text-xl"></i>
-                        <span>Journey<span className="text-indigo-500">Sense</span></span>
+                        <span>Co<span className="text-indigo-500">Review</span></span>
                     </div>
 
                     {/* Navigation Links */}

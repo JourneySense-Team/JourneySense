@@ -91,7 +91,7 @@ export default function LoginPage() {
                              style={{ width: '120px', height: '120px', background: 'rgba(255,255,255,0.05)', backdropFilter: 'blur(10px)' }}>
                             <i className="pi pi-compass text-6xl text-primary"></i>
                         </div>
-                        <h1 className="text-5xl font-bold mb-3 text-white">JourneySense</h1>
+                        <h1 className="text-5xl font-bold mb-3 text-white">CoReview</h1>
                         <p className="text-xl text-gray-400 line-height-3 max-w-30rem mx-auto">
                             Your collaborative hub for peer reviews, skill sharing, and academic growth.
                         </p>
@@ -161,7 +161,7 @@ export default function LoginPage() {
                         <Divider className="my-5 bg-gray-700" />
 
                         <div className="text-center">
-                            <p className="text-gray-400 mb-3">New to JourneySense?</p>
+                            <p className="text-gray-400 mb-3">New to CoReview?</p>
                             <Button
                                 label="Create an Account"
                                 className="p-button-outlined p-button-secondary w-full border-round-xl p-3 text-gray-300 hover:text-white hover:bg-gray-800 hover:border-gray-600"
