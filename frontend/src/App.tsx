@@ -11,6 +11,7 @@ import Hub from './pages/Hub/Hub.tsx';
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import PostPage from "./pages/PostPage.tsx";
 
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -29,21 +30,6 @@ function App() {
             <BrowserRouter>
                 <Routes>
                     {/* Main Workflow */}
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/home" element={<Navigate to="/" replace />} />
-
-                    {/* Feature Pages */}
-                    <Route path="/hubs" element={<Hubs />} />
-                    <Route path="/hub/:id" element={<Hub />} />
-                    <Route path="/your-work" element={<YourWork />} />
-                    <Route path="/others-work" element={<OthersWork />} />
-
-                    {/* Auth Pages */}
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/register" element={<RegisterPage />} />
-                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
-
-                    {/* Protected Routes */}
                     <Route path="/" element={
                         <ProtectedRoute>
                             <HomePage />
@@ -51,17 +37,39 @@ function App() {
                     } />
                     <Route path="/home" element={<Navigate to="/" replace />} />
 
+                    {/* Feature Pages */}
                     <Route path="/hubs" element={
                         <ProtectedRoute>
                             <Hubs />
                         </ProtectedRoute>
                     } />
-
                     <Route path="/hub/:id" element={
                         <ProtectedRoute>
                             <Hub />
                         </ProtectedRoute>
                     } />
+                    <Route path="/your-work" element={
+                        <ProtectedRoute>
+                            <YourWork />
+                        </ProtectedRoute>
+                    } />
+                    <Route path="/others-work" element={
+                        <ProtectedRoute>
+                            <OthersWork />
+                        </ProtectedRoute>
+                    } />
+
+                    {/* NEW: Post Review Page */}
+                    <Route path="/post/:postId" element={
+                        <ProtectedRoute>
+                            <PostPage />
+                        </ProtectedRoute>
+                    } />
+
+                    {/* Auth Pages */}
+                    <Route path="/login" element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/forgot-password" element={<ForgotPasswordPage />} />
 
                     {/* Fallback */}
                     <Route path="*" element={<Navigate to="/" replace />} />
