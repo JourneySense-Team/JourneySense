@@ -1,5 +1,6 @@
 package com.journeysense.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -39,10 +40,12 @@ public class Friendship {
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "requester_id", nullable = false)
+    @JsonIgnore
     private User requester;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "addressee_id", nullable = false)
+    @JsonIgnore
     private User addressee;
 
     @Enumerated(EnumType.STRING)

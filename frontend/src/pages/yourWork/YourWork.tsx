@@ -4,6 +4,8 @@ import { Button } from "primereact/button";
 import NewPostModal from "../../components/NewPostModal.tsx";
 import NavBar from "../../components/navbar/NavBar.tsx";
 
+import "./YourWork.css";
+
 interface Post {
     id: string;
     title: string;
@@ -90,7 +92,7 @@ const YourWork = () => {
                 onClick={() => setShowModal(true)}
             />
 
-            <div className="p-grid">
+            <div className="p-grid posts-list">
                 {posts.length === 0 && (
                     <p className="text-white">No posts yet. Create your first post!</p>
                 )}
