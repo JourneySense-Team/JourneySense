@@ -26,9 +26,21 @@ const NavBar:React.FC = () => {
                     navigate('/hubs');
                 }}
                    className="text-gray-300 hover:text-white transition-colors no-underline">Hubs</a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors no-underline">Review</a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors no-underline">My Work</a>
-                <a href="#" className="text-gray-300 hover:text-white transition-colors no-underline">Other's Work</a>
+                <a href="#"
+                   onClick={(e) => {
+                       e.preventDefault();
+                       navigate('/review');
+                   }} className="text-gray-300 hover:text-white transition-colors no-underline">Review</a>
+                <a href="#"
+                   onClick={(e) => {
+                       e.preventDefault();
+                       navigate('/your-work');
+                   }} className="text-gray-300 hover:text-white transition-colors no-underline">My Work</a>
+                <a href="#"
+                   onClick={(e) => {
+                       e.preventDefault();
+                       navigate('/others-work');
+                   }} className="text-gray-300 hover:text-white transition-colors no-underline">Other's Work</a>
             </div>
         </div>
         <div className="leftside-controls">
