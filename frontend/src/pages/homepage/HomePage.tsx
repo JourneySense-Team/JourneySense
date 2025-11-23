@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { Avatar } from 'primereact/avatar';
 
 import "./HomePage.css";
-import NavBar from "../components/NavBar.tsx";
+import NavBar from '../../components/navbar/NavBar.tsx';
 
 const HomePage: React.FC = () => {
     const navigate = useNavigate();
@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
                 <div className="grid">
 
                     {/* Left Section - Workspace Hubs */}
-                    <div className="col-12 lg:col-8">
+                    <div className="col-12 lg:col-8 workspace-hubs">
                         <div className="flex align-items-center justify-content-between mb-5">
                             <h2 className="text-white text-4xl font-bold m-0 flex align-items-center gap-3">
                                 <i className="pi pi-sitemap" style={{ color: '#6366f1', fontSize: '2rem' }}></i>
@@ -88,7 +88,7 @@ const HomePage: React.FC = () => {
                     </div>
 
                     {/* Right Section - Team Reviews */}
-                    <div className="col-12 lg:col-4">
+                    <div className="col-12 lg:col-4 team-reviews">
                         <div className="flex align-items-center justify-content-between mb-5">
                             <h2 className="text-white text-4xl font-bold m-0 flex align-items-center gap-3">
                                 <i className="pi pi-comments" style={{ color: '#6366f1', fontSize: '2rem' }}></i>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import type { IHighlight } from "react-pdf-highlighter";
-import PdfReviewer from '../components/PdfReviewer.tsx'; // Import component from Step 3
-import { CommentSidebar } from '../components/CommentSidebar.tsx'; // Import component from Step 2
+import PdfReviewer from '../../components/PdfReviewer.tsx'; // Import component from Step 3
+import { CommentSidebar } from '../../components/CommentSidebar.tsx'; // Import component from Step 2
 import './PostPage.css';
 
 const PostPage: React.FC = () => {

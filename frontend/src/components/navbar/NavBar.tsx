@@ -1,7 +1,7 @@
-import {Avatar} from "primereact/avatar";
 import {Button} from "primereact/button";
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import "./NavBar.css";
 
 const NavBar:React.FC = () => {
     const navigate = useNavigate();
@@ -34,14 +34,11 @@ const NavBar:React.FC = () => {
         <div className="leftside-controls">
 
             <div className="user-wrapper">
-                <Avatar
-                    label={user.username ? user.username[0].toUpperCase() : 'U'}
-                    size="large"
-                    shape="circle"
-                    style={{backgroundColor: '#6366f1', color: 'white'}}
-                />
-                <div>
-                    <p className="text-white font-bold m-0 text-lg">{user.username || 'User'}</p>
+                <div className="username-container">
+                    <p className="username-with-badge">
+                        {user.username || 'User'}
+                        <span className="user-badge">📚</span>
+                    </p>
                 </div>
             </div>
 

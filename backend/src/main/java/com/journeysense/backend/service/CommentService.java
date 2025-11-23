@@ -52,6 +52,20 @@ public class CommentService {
         return toDTO(commentRepository.save(comment));
     }
 
+    @Transactional(readOnly = true)
+    public List<CommentDTO> findByPostId(UUID postId) {
+        return commentRepository.findByPostId(postId).stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional(readOnly = true)
+    public List<CommentDTO> findByReviewerId(UUID userId) {
+        return commentRepository.findByAuthorId(userId).stream()
+                .map(this::toDTO)
+                .collect(Collectors.toList());
+    }
+
     @Transactional
     public void delete(UUID id) {
         commentRepository.deleteById(id);

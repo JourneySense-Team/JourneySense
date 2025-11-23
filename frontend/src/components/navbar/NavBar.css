@@ -1,0 +1,59 @@
+.user-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.leftside-controls{
+    display: flex;
+    gap: 20px;
+}
+
+.navbar{
+   padding-left: 20px;
+   padding-right: 20px;
+   padding-bottom: 10px;
+    padding-top: 10px; 
+    background-color: #13131a;
+    border-bottom: 1px solid #1f1f2e;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { 
+        transform: scale(1);
+    }
+    50% { 
+        transform: scale(1.20);
+    }
+}
+
+.username-with-badge {
+    font-size: 1.125rem;
+    margin: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 550;
+    letter-spacing: 0.025em;
+    transition: all 0.3s ease
+}
+
+.user-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    animation: rotate-slight 3s ease-in-out infinite;
+}
+
+@keyframes rotate-slight {
+    25% { 
+        transform: rotate(-20deg);
+    }
+
+    75% { 
+        transform: rotate(20deg);
+    }
+}

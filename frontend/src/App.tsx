@@ -5,12 +5,13 @@ import OthersWork from "./pages/OthersWork.tsx";
 import "primeicons/primeicons.css";
 import "./App.css";
 // Pages
-import HomePage from "./pages/HomePage.tsx";
-import Hubs from './pages/Hubs/Hubs.tsx';
-import Hub from './pages/Hub/Hub.tsx';
+import HomePage from './pages/homepage/HomePage.tsx';
+import Hubs from './pages/hubs/Hubs.tsx';
+import Hub from './pages/hub/Hub.tsx';
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
+import ReviewPage from './pages/review/ReviewPage.tsx';
 
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
@@ -42,6 +43,7 @@ function App() {
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegisterPage />} />
                     <Route path="/forgot-password" element={<ForgotPasswordPage />} />
+                    <Route path="/reviews" element={<ReviewPage />} />
 
                     {/* Protected Routes */}
                     <Route path="/" element={

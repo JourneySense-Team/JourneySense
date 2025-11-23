@@ -11,6 +11,7 @@ import { Dropdown } from 'primereact/dropdown';
 import { Tag } from 'primereact/tag';
 import { Toast } from 'primereact/toast';
 import './Hubs.css';
+import NavBar from '../../components/navbar/NavBar';
 
 interface HubDTO {
     id: string;
@@ -211,182 +212,181 @@ export default function Hubs() {
             <Toast ref={toast} />
             <div className="min-h-screen" style={{ backgroundColor: '#0a0a0f' }}>
                 {/* Navigation Bar */}
-                <nav className="flex justify-content-between align-items-center px-6 py-4"
-                     style={{ backgroundColor: '#13131a', borderBottom: '1px solid #1f1f2e' }}>
-                    <div className="flex align-items-center gap-6">
-                        <h1 className="text-3xl font-bold m-0 cursor-pointer"
-                            style={{ color: '#6366f1' }}
-                            onClick={() => navigate('/home')}>
-                            Share&View
-                        </h1>
-                        <div className="flex gap-4 ml-6">
-                            <a href="#" onClick={(e) => { e.preventDefault(); navigate('/home'); }}
-                               className="text-gray-300 hover:text-white transition-colors no-underline">Home</a>
-                            <a href="#" className="text-white transition-colors no-underline">Hubs</a>
-                            <a href="#" className="text-gray-300 hover:text-white transition-colors no-underline">Review</a>
-                            <a href="#" className="text-gray-300 hover:text-white transition-colors no-underline">My Work</a>
-                            <a href="#" className="text-gray-300 hover:text-white transition-colors no-underline">Other's Work</a>
-                        </div>
-                    </div>
-                    <Button
-                        label="Logout"
-                        icon="pi pi-sign-out"
-                        onClick={handleLogout}
-                        className="p-button-text p-button-plain text-gray-300 hover:text-white"
-                    />
-                </nav>
+                <NavBar/>
 
                 {/* HEADER */}
                 <div className="hubs-header">
-                    <h2 className="text-white">Hubs</h2>
                     <Button label="Create Hub" icon="pi pi-plus" onClick={() => setShowDialog(true)} />
                 </div>
 
                 {/* HUB GRID */}
-                <div className="hubs-grid">
-                    {loading && <p className="text-white">Loading hubs...</p>}
+               <div className="hubs-grid">
+    {loading && (
+        <div className="loading-container">
+            <div className="spinner"></div>
+            <p>Loading hubs...</p>
+        </div>
+    )}
 
-                    {!loading && hubs.length === 0 && (
-                        <div className="col-12 text-center py-6">
-                            <i className="pi pi-inbox text-6xl text-gray-600 mb-4"></i>
-                            <p className="text-gray-400 text-xl">No hubs yet. Create your first hub!</p>
-                        </div>
-                    )}
+    {!loading && hubs.length === 0 && (
+        <div className="empty-state">
+            <div className="empty-icon">📚</div>
+            <h3>No hubs yet</h3>
+            <p>Create your first hub to get started!</p>
+        </div>
+    )}
 
-                    {!loading &&
-                        hubs.map((hub) => (
-                            <Card
-                                key={hub.id}
-                                className="hub-card"
-                                onClick={() => navigate(`/hub/${hub.id}`)}
-                            >
-                                <div className="hub-card-content">
-                                    <Avatar
-                                        label={getInitials(hub.name)}
-                                        size="xlarge"
-                                        shape="square"
-                                        style={{
-                                            width: '8rem',
-                                            height: '8rem',
-                                            backgroundColor: '#6366F1',
-                                            color: 'white',
-                                            flexShrink: 0
-                                        }}
-                                    />
-
-                                    <div className="hub-info">
-                                        <h3>{hub.name}</h3>
-                                        <div>
-                                            <small>{hub.description}</small>
-                                            {hub.isPrivate && (
-                                                <i className="pi pi-lock" style={{ opacity: 0.7, marginTop: '0.25rem', display: 'block' }} />
-                                            )}
-                                        </div>
-
-                                        {hub.tags && hub.tags.length > 0 && (
-                                            <div style={{ marginTop: 'auto', paddingTop: '0.5rem' }}>
-                                                <Tag
-                                                    value={hub.tags[0]}
-                                                    severity={getTagSeverity(hub.tags[0])}
-                                                    style={{ fontSize: '0.7rem' }}
-                                                />
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </Card>
-                        ))}
+    {!loading && hubs.map((hub) => (
+        <div
+            key={hub.id}
+            className="hub-card"
+            onClick={() => navigate(`/hub/${hub.id}`)}
+        >
+            <div className="hub-card-avatar">
+                <div className="hub-avatar">
+                    {getInitials(hub.name)}
                 </div>
+                {hub.isPrivate && (
+                    <div className="privacy-badge">
+                        🔒
+                    </div>
+                )}
+            </div>
+
+            <div className="hub-card-content">
+                <h3 className="hub-title">{hub.name}</h3>
+                <p className="hub-description">{hub.description}</p>
+
+                {hub.tags && hub.tags.length > 0 && (
+                    <div className="hub-tags">
+                        {hub.tags.map((tag, index) => (
+                            <span key={index} className={`hub-tag tag-${tag.toLowerCase()}`}>
+                                {tag}
+                            </span>
+                        ))}
+                    </div>
+                )}
+            </div>
+
+            <div className="hub-card-footer">
+                <span className="hub-arrow">→</span>
+            </div>
+        </div>
+    ))}
+</div>
 
                 {/* CREATE HUB POPUP */}
                 <Dialog
-                    header="Create New Hub"
-                    visible={showDialog}
-                    style={{ width: '32rem' }}
-                    modal
-                    onHide={() => setShowDialog(false)}
-                >
-                    <div className="p-fluid" style={{ display: 'flex', flexDirection: 'column', gap: '1.2rem' }}>
+    visible={showDialog}
+    modal
+    onHide={() => setShowDialog(false)}
+    className="create-hub-dialog"
+    showHeader={false}
+>
+    <div className="dialog-content">
+        {/* Header */}
+        <div className="dialog-header">
+            <div className="dialog-icon">
+                <span className="icon-emoji">📚</span>
+            </div>
+            <h2 className="dialog-title">Create New Hub</h2>
+            <p className="dialog-subtitle">Start your learning community</p>
+        </div>
+
+        {/* Form */}
+        <div className="dialog-form">
+            <div className="form-group">
+                <label htmlFor="name" className="form-label">
+                    Hub Name <span className="required">*</span>
+                </label>
+                <InputText
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="e.g., Advanced JavaScript"
+                    className="form-input"
+                />
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="desc" className="form-label">
+                    Description <span className="required">*</span>
+                </label>
+                <InputText
+                    id="desc"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    placeholder="What will members learn?"
+                    className="form-input"
+                />
+            </div>
+
+            <div className="form-group">
+                <label htmlFor="difficulty" className="form-label">
+                    Difficulty Level
+                </label>
+                <Dropdown
+                    id="difficulty"
+                    value={selectedTag}
+                    onChange={(e) => setSelectedTag(e.value)}
+                    options={tagOptions}
+                    optionLabel="label"
+                    optionValue="value"
+                    placeholder="Select a level (Optional)"
+                    className="form-input"
+                />
+            </div>
+
+            <div className="form-group-checkbox">
+                <div className="checkbox-wrapper">
+                    <Checkbox
+                        inputId="isPrivate"
+                        checked={isPrivate}
+                        onChange={(e) => setIsPrivate(e.checked!)}
+                    />
+                    <label htmlFor="isPrivate" className="checkbox-label">
+                        <span className="checkbox-icon">🔒</span>
                         <div>
-                            <label htmlFor="name" className="block mb-2 font-semibold">
-                                Hub Name <span className="text-red-500">*</span>
-                            </label>
-                            <InputText
-                                id="name"
-                                value={name}
-                                onChange={(e) => setName(e.target.value)}
-                                placeholder="Enter hub name"
-                            />
+                            <div className="checkbox-title">Private Hub</div>
+                            <div className="checkbox-description">Require password to join</div>
                         </div>
+                    </label>
+                </div>
+            </div>
 
-                        <div>
-                            <label htmlFor="desc" className="block mb-2 font-semibold">
-                                Description <span className="text-red-500">*</span>
-                            </label>
-                            <InputText
-                                id="desc"
-                                value={description}
-                                onChange={(e) => setDescription(e.target.value)}
-                                placeholder="Enter hub description"
-                            />
-                        </div>
+            {isPrivate && (
+                <div className="form-group password-group">
+                    <label htmlFor="pass" className="form-label">
+                        Password <span className="required">*</span>
+                    </label>
+                    <InputText
+                        id="pass"
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="Enter a secure password"
+                        className="form-input"
+                    />
+                </div>
+            )}
+        </div>
 
-                        <div>
-                            <label htmlFor="difficulty" className="block mb-2 font-semibold">
-                                Difficulty Level
-                            </label>
-                            <Dropdown
-                                id="difficulty"
-                                value={selectedTag}
-                                onChange={(e) => setSelectedTag(e.value)}
-                                options={tagOptions}
-                                optionLabel="label"
-                                optionValue="value"
-                                placeholder="Select a Level (Optional)"
-                                className="w-full"
-                            />
-                        </div>
-
-                        <div className="flex align-items-center gap-2">
-                            <Checkbox
-                                inputId="isPrivate"
-                                checked={isPrivate}
-                                onChange={(e) => setIsPrivate(e.checked!)}
-                            />
-                            <label htmlFor="isPrivate" className="cursor-pointer">Private Hub</label>
-                        </div>
-
-                        {isPrivate && (
-                            <div>
-                                <label htmlFor="pass" className="block mb-2 font-semibold">
-                                    Password <span className="text-red-500">*</span>
-                                </label>
-                                <InputText
-                                    id="pass"
-                                    type="password"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    placeholder="Enter password"
-                                />
-                            </div>
-                        )}
-
-                        <div className="flex gap-2 pt-3">
-                            <Button
-                                label="Cancel"
-                                icon="pi pi-times"
-                                onClick={() => setShowDialog(false)}
-                                className="p-button-text"
-                            />
-                            <Button
-                                label="Create"
-                                icon="pi pi-check"
-                                onClick={createHub}
-                                className="flex-1"
-                            />
-                        </div>
-                    </div>
-                </Dialog>
+        {/* Footer */}
+        <div className="dialog-footer">
+            <Button
+                label="Cancel"
+                onClick={() => setShowDialog(false)}
+                className="btn-cancel"
+            />
+            <Button
+                label="Create Hub"
+                onClick={createHub}
+                className="btn-create"
+                icon="pi pi-plus"
+            />
+        </div>
+    </div>
+</Dialog>
             </div>
         </>
     );

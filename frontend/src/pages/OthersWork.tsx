@@ -39,6 +39,7 @@ const OthersWork = () => {
     }, [currentHubId, currentUserId]);
 
     return (
+        <>
         <div className="glass-panel p-4">
             <h1 className="text-2xl text-white mb-4">Others' Work</h1>
 
@@ -73,6 +74,8 @@ const OthersWork = () => {
                 ))}
             </div>
         </div>
+        </>
+
     );
 };
 

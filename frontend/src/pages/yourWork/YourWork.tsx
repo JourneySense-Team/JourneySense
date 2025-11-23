@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card } from "primereact/card";
 import { Button } from "primereact/button";
 import NewPostModal from "../../components/NewPostModal.tsx";
-import NavBar from "../../components/NavBar.tsx";
+import NavBar from "../../components/navbar/NavBar.tsx";
 
 interface Post {
     id: string;
