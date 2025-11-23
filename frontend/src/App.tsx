@@ -1,17 +1,18 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import YourWork from "./pages/yourWork/YourWork.tsx";
-import OthersWork from "./pages/OthersWork.tsx";
+import OthersWork from "./pages/othersWork/OthersWork.tsx";
 import "primeicons/primeicons.css";
 import "./App.css";
 // Pages
 import HomePage from "./pages/HomePage.tsx";
-import Hubs from './pages/Hubs/Hubs.tsx';
-import Hub from './pages/Hub/Hub.tsx';
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import ForgotPasswordPage from "./pages/auth/ForgotPasswordPage";
 import PostPage from "./pages/PostPage.tsx";
+import Hubs from './pages/hubs/Hubs.tsx';
+import Hub from './pages/hub/Hub.tsx';
+
 
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
