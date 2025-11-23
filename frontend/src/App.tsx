@@ -1,7 +1,7 @@
 import './App.css'
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import YourWork from "./pages/yourWork/YourWork.tsx";
-import OthersWork from "./pages/OthersWork.tsx";
+import OthersWork from "./pages/othersWork/OthersWork.tsx";
 import "primeicons/primeicons.css";
 import "./App.css";
 // Pages
