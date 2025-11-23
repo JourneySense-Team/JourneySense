@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
+import NavBar from "../../components/navbar/NavBar";
 import "./OthersWork.css";
-import NavBar from "../../components/NavBar";
 
 export type TagType = "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
 

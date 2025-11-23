@@ -55,26 +55,17 @@
 
 /* --- PDF AREA --- */
 .pp-pdf-area {
-    flex: 1;
-    background-color: #1e1e24;
-    overflow-y: auto;
-    padding: 3rem 0rem; /* Removed all horizontal padding */
-
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start; /* Start from top */
+    flex-grow: 1;
+    position: relative;
+    overflow-y: auto; /* Make this container scrollable */
 }
 
-/* The actual PDF Paper */
 .pp-document-viewer {
-    /* Remove fixed width percentages and margins that push it off */
-    /* Let the content define the width, but cap it so it doesn't explode */
-    width: fit-content;
-    max-width: 1200px; /* Adjust this if you want it wider/narrower */
-
-    height: fit-content;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.6);
-    background-color: #525659;
+    height: 100%;
+    width: 100%;
+    overflow-y: auto;
+    background: #2a2a2e;
+    border-right: 1px solid #3a3a40;
 }
 
 /* --- SIDEBAR --- */

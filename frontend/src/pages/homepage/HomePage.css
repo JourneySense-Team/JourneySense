@@ -1,0 +1,4 @@
+.workspace-hubs, .team-reviews {
+    height: 80vh;
+    overflow-y: scroll;
+}

@@ -22,6 +22,7 @@ public class PostsService {
     private final PostsRepository postsRepository;
     private final UserRepository userRepository;
     private final HubRepository hubRepository;
+    private final FileService fileService;
 
     @Transactional(readOnly = true)
     public List<PostDTO> getAll() {
@@ -82,12 +83,14 @@ public class PostsService {
     }
 
     private PostDTO toDTO(Post post) {
+        String fileUrl = post.getFileUrl() != null ? "http://localhost:8080" + post.getFileUrl() : null;
+
         return new PostDTO(
                 post.getId(),
                 post.getTitle(),
                 post.getDescription(),
                 post.getTag(),
-                post.getFileUrl(),
+                fileUrl,
                 post.getCreatedAt(),
                 post.getUser().getId(),
                 post.getUser().getUsername(),

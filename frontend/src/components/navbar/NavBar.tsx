@@ -1,7 +1,7 @@
-import {Avatar} from "primereact/avatar";
 import {Button} from "primereact/button";
 import React from "react";
 import {useNavigate} from "react-router-dom";
+import "./NavBar.css";
 
 const NavBar:React.FC = () => {
     const navigate = useNavigate();
@@ -17,10 +17,13 @@ const NavBar:React.FC = () => {
     return (<nav className="flex justify-content-between align-items-center navbar">
         <div className="flex align-items-center gap-6">
             <h1 className="text-3xl font-bold m-0" style={{color: '#6366f1'}}>
-                Share&View
+                CoReview
             </h1>
             <div className="flex gap-4 ml-6">
-                <a href="#" className="text-white transition-colors no-underline">Home</a>
+                <a href="#" onClick={(e) => {
+    e.preventDefault();
+    navigate('/');
+}} className="text-white transition-colors no-underline">Home</a>
                 <a href="#" onClick={(e) => {
                     e.preventDefault();
                     navigate('/hubs');
@@ -29,7 +32,7 @@ const NavBar:React.FC = () => {
                 <a href="#"
                    onClick={(e) => {
                        e.preventDefault();
-                       navigate('/review');
+                       navigate('/reviews');
                    }}
                    className="text-gray-300 hover:text-white transition-colors no-underline">Review</a>
                 <a href="#"
@@ -49,14 +52,11 @@ const NavBar:React.FC = () => {
         <div className="leftside-controls">
 
             <div className="user-wrapper">
-                <Avatar
-                    label={user.username ? user.username[0].toUpperCase() : 'U'}
-                    size="large"
-                    shape="circle"
-                    style={{backgroundColor: '#6366f1', color: 'white'}}
-                />
-                <div>
-                    <p className="text-white font-bold m-0 text-lg">{user.username || 'User'}</p>
+                <div className="username-container">
+                    <p className="username-with-badge">
+                        {user.username || 'User'}
+                        <span className="user-badge">📚</span>
+                    </p>
                 </div>
             </div>
 

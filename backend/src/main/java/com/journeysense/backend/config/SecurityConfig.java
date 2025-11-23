@@ -41,6 +41,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // UPDATED: Added "/uploads/**" to the permitAll list
                         .requestMatchers("/api/auth/**", "/v3/api-docs/**", "/swagger-ui/**", "/uploads/**").permitAll()
+                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/posts/**").authenticated()
                         .anyRequest().authenticated()
                 )
                 .sessionManagement(sess -> sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

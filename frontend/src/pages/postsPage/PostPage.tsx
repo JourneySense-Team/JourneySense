@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { IHighlight } from "react-pdf-highlighter";
-import PdfReviewer from '../components/PdfReviewer.tsx';
-import { CommentSidebar } from '../components/CommentSidebar.tsx';
-import NavBar from '../components/NavBar.tsx';
+import PdfReviewer from '../../components/PdfReviewer.tsx'; // Import component from Step 3
+import { CommentSidebar } from '../../components/CommentSidebar.tsx'; // Import component from Step 2
 import './PostPage.css';
+import NavBar from '../../components/navbar/NavBar.tsx';
 
 interface PostDetails {
     id: string;
@@ -57,8 +57,6 @@ const PostPage: React.FC = () => {
     if (loading) return <div className="text-white p-8 text-center">Loading Document...</div>;
     if (!post) return <div className="text-white p-8 text-center">Post not found</div>;
 
-    const absoluteFileUrl = `http://localhost:8080${post.fileUrl}`;
-
     return (
         <div className="flex flex-column h-screen">
             <NavBar />
@@ -94,7 +92,7 @@ const PostPage: React.FC = () => {
                     {/* PDF AREA */}
                     <div className="pp-pdf-area">
                         <PdfReviewer
-                            fileUrl={absoluteFileUrl}
+                            fileUrl={post.fileUrl}
                             highlights={highlights}
                             activeId={activeHighlightId}
                             onNewComment={(newHighlight) => {
